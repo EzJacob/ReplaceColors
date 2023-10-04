@@ -1,5 +1,5 @@
 # ReplaceColors
-Python script to replace specific RGB values in an image with different RGB colors.
+Python script to replace specific RGB values of images with different RGB colors.
 
 **Note**
 
