@@ -15,8 +15,9 @@ def select_files_with_specific_extension(file_path, extension):
 
 # swap a pixel color with another pixel color
 def swap_pixel_color_with_another_color(image, pixel_cord, other_pixel_color):
-    other_color = list(other_pixel_color)
-    other_color.append(255)
+    if len(image.getpixel(pixel_cord)) == 4:
+        other_color = list(other_pixel_color)
+        other_color.append(255)
     other_pixel_color = tuple(other_pixel_color)
     image.putpixel(pixel_cord, other_pixel_color)
 
@@ -45,7 +46,7 @@ def swap_colors(image, colors):
     for y in range(height):
         for x in range(width):
             pixel_color = image.getpixel((x, y))
-            if pixel_color[3] == 0:
+            if len(pixel_color) == 4 and pixel_color[3] == 0:
                 continue
             pixel_color = get_pixel_color_with_no_alpha(pixel_color)
             other_pixel_color = get_color_in_colors_list(pixel_color, colors)
@@ -157,7 +158,7 @@ if __name__ == '__main__':
                 image.save(file)
                 image.close()
             except Exception as e:
-                print(f"Failed to open the file {file}: {e}")
+                print(f"Failed to open the file or to do operations on it. {file}: {e}")
 
         print(f"Script is finished with {arg}")
 
